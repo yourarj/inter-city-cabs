@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.github.yourarj.intercitycabs.entity;
 
 import jakarta.persistence.Entity;
@@ -11,14 +12,15 @@ import lombok.ToString;
 @Getter
 @ToString
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String userName;
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
 
-    protected User() {}
+private String userName;
 
-    public User(final String userName){
-        this.userName=userName;
-    }
+protected User() {}
+
+public User(final String userName) {
+	this.userName = userName;
+}
 }

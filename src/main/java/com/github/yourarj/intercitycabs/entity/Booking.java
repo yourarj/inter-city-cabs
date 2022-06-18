@@ -1,43 +1,42 @@
+/* (C)2022 */
 package com.github.yourarj.intercitycabs.entity;
 
 import jakarta.persistence.*;
+import java.time.Instant;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.time.Instant;
 
 @Entity
 @Getter
 @ToString
 public class Booking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
 
-    @ManyToOne
-    @JoinColumn(name ="FK_CabId")
-    private Cab cabId;
+@ManyToOne
+@JoinColumn(name = "FK_CabId")
+private Cab cab;
 
-    @ManyToOne
-    @JoinColumn(name ="FK_SourceCityId")
-    private City source;
+@ManyToOne
+@JoinColumn(name = "FK_SourceCityId")
+private City source;
 
-    @ManyToOne
-    @JoinColumn(name ="FK_DestinationCityId")
-    private City destination;
+@ManyToOne
+@JoinColumn(name = "FK_DestinationCityId")
+private City destinationCity;
 
-    private Instant rideStart;
+private Instant rideStart;
 
-    private Instant rideEnd;
+private Instant rideEnd;
 
-    private long rideDuration;
+private long rideDuration;
 
-    protected Booking() {
-    }
+protected Booking() {}
 
-    public Booking(final Cab cab, final City source, final City destination) {
-        this.cabId = cab;
-        this.source = source;
-        this.destination = destination;
-    }
+public Booking(final Cab cab, final City source, final City destinationCity) {
+	this.cab = cab;
+	this.source = source;
+	this.destinationCity = destinationCity;
+}
 }
