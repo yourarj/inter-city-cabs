@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.github.yourarj.intercitycabs.entity;
 
 import jakarta.persistence.Entity;

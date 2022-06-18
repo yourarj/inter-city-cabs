@@ -31,10 +31,10 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.liquibase</groupId>
-      <artifactId>liquibase-core</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.liquibase</groupId>-->
+<!--      <artifactId>liquibase-core</artifactId>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -121,63 +121,6 @@
             </exclude>
           </excludes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-        <version>${spotless.version}</version>
-        <configuration>
-          <!-- optional: limit format enforcement to just the files changed by this feature branch -->
-          <ratchetFrom>origin/main</ratchetFrom>
-          <formats>
-            <!-- you can define as many formats as you want, each is independent -->
-            <format>
-              <!-- define the files to apply to -->
-              <includes>
-                <include>*.md</include>
-                <include>.gitignore</include>
-                <include>src/main/java/**/*.java</include>
-                <include>src/test/java/**/*.java</include>
-              </includes>
-              <!-- define the steps to apply to those files -->
-              <trimTrailingWhitespace></trimTrailingWhitespace>
-              <endWithNewline></endWithNewline>
-              <indent>
-                <tabs>true</tabs>
-                <spacesPerTab>4</spacesPerTab>
-              </indent>
-            </format>
-          </formats>
-          <!-- define a language-specific format -->
-          <java>
-            <googleJavaFormat>
-              <version>${google-java-format.version}</version>
-              <reflowLongStrings>true</reflowLongStrings>
-            </googleJavaFormat>
-
-            <!-- make sure every file has the following copyright header.
-                          optionally, Spotless can set copyright years by digging
-                          through git history (see "license" section below) -->
-            <licenseHeader>
-              <content>/* (C)$YEAR */</content>
-              <!-- or <file>${project.basedir}/license-header</file> -->
-            </licenseHeader>
-          </java>
-          <pom>
-            <includes>
-              <include>pom.xml</include>
-            </includes>
-            <sortPom></sortPom>
-          </pom>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>compile</phase>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
