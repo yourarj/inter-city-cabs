@@ -32,13 +32,14 @@ public class Cab {
     private CabState state = CabState.IDLE;
 
     @Getter
+    @Setter
     private Instant currentRideStart;
 
     protected Cab() {
     }
 
-    public Cab(final String registrationCode, final City city) {
+    public Cab(final String registrationCode) {
         this.registrationCode = registrationCode;
-        this.city = city;
+        this.currentRideStart = Instant.now();
     }
 }

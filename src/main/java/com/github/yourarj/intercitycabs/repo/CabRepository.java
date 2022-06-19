@@ -11,4 +11,5 @@ import java.util.Optional;
 
 public interface CabRepository extends CrudRepository<Cab, Long> {
     List<Cab> findByCityIdAndState(final long cityId, final CabState cabState);
+    Optional<Cab> findByRegistrationCode(final String registrationCode);
 }

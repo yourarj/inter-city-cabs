@@ -13,6 +13,7 @@ import com.github.yourarj.intercitycabs.service.BookingService;
 import com.github.yourarj.intercitycabs.util.CabState;
 import jakarta.transaction.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,9 +63,20 @@ public class BookingServiceImpl implements BookingService {
                     new InvalidCityException(
                         String.format("City with id `%d` doesn't exist", destinationCityId)));
     cab.setState(CabState.ON_TRIP);
+    cab.setCurrentRideStart(Instant.now());
     cab.setCity(null);
     cabRepository.save(cab);
     final Booking booking = new Booking(cab, sourceCity, destinationCity);
     return bookingRepository.save(booking);
+  }
+
+  @Override
+  public Booking bookRideWithExternalCityId(final String sourceCityExternalId, final String destinationCityExternalId) throws InvalidCabException, InvalidCityException {
+    final City sourceCity = cityRepository.findByCityName(sourceCityExternalId).orElseThrow(() -> new InvalidCityException(
+            String.format("City with external id `%s` doesn't exist", sourceCityExternalId)));
+    final City destinationCity = cityRepository.findByCityName(destinationCityExternalId).orElseThrow(() -> new InvalidCityException(
+            String.format("City with external id `%s` doesn't exist", destinationCityExternalId)));
+
+    return bookRide(sourceCity.getId(), destinationCity.getId());
   }
 }

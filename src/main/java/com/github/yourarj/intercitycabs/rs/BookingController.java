@@ -21,8 +21,8 @@ public class BookingController {
 
   @PutMapping(path = "/create")
   protected Booking bookRide(
-      @RequestParam final long sourceCityId, @RequestParam final long destinationCityId)
+      @RequestParam("sourceCityId") final String sourceCityId, @RequestParam("destinationCityId") final String destinationCityId)
       throws InvalidCabException, InvalidCityException {
-    return bookingService.bookRide(sourceCityId, destinationCityId);
+    return bookingService.bookRideWithExternalCityId(sourceCityId, destinationCityId);
   }
 }

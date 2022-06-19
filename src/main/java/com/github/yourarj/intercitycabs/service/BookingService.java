@@ -6,6 +6,9 @@ import com.github.yourarj.intercitycabs.exception.InvalidCabException;
 import com.github.yourarj.intercitycabs.exception.InvalidCityException;
 
 public interface BookingService {
-    Booking bookRide(final long cabId, final long destinationCityId)
+    Booking bookRide(final long sourceCityId, final long destinationCityId)
+            throws InvalidCabException, InvalidCityException;
+
+    Booking bookRideWithExternalCityId(final String sourceCityExternalId, final String destinationCityExternalId)
             throws InvalidCabException, InvalidCityException;
 }
