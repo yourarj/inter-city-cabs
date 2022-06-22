@@ -2,6 +2,7 @@
 package com.github.yourarj.intercitycabs.rs;
 
 import com.github.yourarj.intercitycabs.entity.Cab;
+import com.github.yourarj.intercitycabs.exception.InvalidCityException;
 import com.github.yourarj.intercitycabs.service.CabService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class CabController {
     }
 
     @PutMapping("/create")
-    protected Cab createCab(@RequestParam("registrationCode") final String registrationCode) {
-        return cabService.create(registrationCode);
+    protected Cab createCab(@RequestParam("registrationCode") final String registrationCode, @RequestParam("initialCity") final String externalCityId) throws InvalidCityException {
+        return cabService.create(registrationCode, externalCityId);
     }
 }

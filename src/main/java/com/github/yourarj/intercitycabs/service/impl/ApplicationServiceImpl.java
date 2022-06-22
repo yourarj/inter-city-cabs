@@ -53,7 +53,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                       .findByRegistrationCode(cabId)
                       .orElseGet(
                           () -> {
-                            Cab newCab = new Cab(cabId);
+                            Cab newCab = new Cab(cabId, city);
                             return cabRepository.save(newCab);
                           });
 

@@ -38,8 +38,9 @@ public class Cab {
     protected Cab() {
     }
 
-    public Cab(final String registrationCode) {
+    public Cab(final String registrationCode, final City initialCity) {
         this.registrationCode = registrationCode;
         this.currentRideStart = Instant.now();
+        this.setCity(initialCity);
     }
 }

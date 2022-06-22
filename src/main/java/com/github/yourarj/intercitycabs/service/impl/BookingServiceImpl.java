@@ -4,6 +4,7 @@ package com.github.yourarj.intercitycabs.service.impl;
 import com.github.yourarj.intercitycabs.entity.Booking;
 import com.github.yourarj.intercitycabs.entity.Cab;
 import com.github.yourarj.intercitycabs.entity.City;
+import com.github.yourarj.intercitycabs.exception.InvalidBookingException;
 import com.github.yourarj.intercitycabs.exception.InvalidCabException;
 import com.github.yourarj.intercitycabs.exception.InvalidCityException;
 import com.github.yourarj.intercitycabs.repo.BookingRepository;
@@ -78,5 +79,24 @@ public class BookingServiceImpl implements BookingService {
             String.format("City with external id `%s` doesn't exist", destinationCityExternalId)));
 
     return bookRide(sourceCity.getId(), destinationCity.getId());
+  }
+
+  @Override
+  public void endRide(long bookingId) throws InvalidBookingException {
+    final Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new InvalidBookingException(
+            String.format("City with external id `%s` doesn't exist", bookingId)));
+
+    booking.setRideEnd(Instant.now());
+    Cab targetCab = booking.getCab();
+    targetCab.setCity(booking.getDestinationCity());
+    targetCab.setState(CabState.IDLE);
+
+    cabRepository.save(targetCab);
+    bookingRepository.save(booking);
+  }
+
+  @Override
+  public Iterable<Booking> getAll() {
+    return bookingRepository.findAll();
   }
 }

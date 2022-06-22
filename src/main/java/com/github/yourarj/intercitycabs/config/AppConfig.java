@@ -1,6 +1,5 @@
 package com.github.yourarj.intercitycabs.config;
 
-import com.github.yourarj.intercitycabs.entity.Cab;
 import com.github.yourarj.intercitycabs.repo.BookingRepository;
 import com.github.yourarj.intercitycabs.repo.CabRepository;
 import com.github.yourarj.intercitycabs.repo.CityRepository;
@@ -32,8 +31,8 @@ public class AppConfig {
   }
 
   @Bean
-  protected CabService cabService(CabRepository cabRepository) {
-    return new CabServiceImpl(cabRepository);
+  protected CabService cabService(CabRepository cabRepository, CityRepository cityRepository) {
+    return new CabServiceImpl(cabRepository, cityRepository);
   }
 
   @Bean

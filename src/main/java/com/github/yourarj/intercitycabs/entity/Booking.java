@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -28,10 +29,13 @@ public class Booking {
     @JoinColumn(name = "FK_DestinationCityId")
     private City destinationCity;
 
+    @Setter
     private Instant rideStart;
 
+    @Setter
     private Instant rideEnd;
 
+    @Setter
     private long rideDuration;
 
     protected Booking() {
